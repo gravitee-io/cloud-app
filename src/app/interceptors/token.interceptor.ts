@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {LoginCallbackComponent} from './login/login-callback.component';
-import {LogoutCallbackComponent} from './logout/logout-callback.component';
+import {Injectable} from '@angular/core';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {AuthService} from '../services/auth.service';
+import {Observable} from 'rxjs';
 
+@Injectable()
+export class TokenInterceptor implements HttpInterceptor {
 
-const routes: Routes = [
-  { path: 'login/callback', component: LoginCallbackComponent },
-  { path: 'logout/callback', component: LogoutCallbackComponent },
-];
+  constructor(public authService: AuthService) {}
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+    const dupReq = req.clone({ headers: req.headers.set('Authorization', `Bearer ${this.authService.getToken()}`) });
+    return next.handle(dupReq);
+  }
+}

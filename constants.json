@@ -1,0 +1,25 @@
+{
+  "title": "Company App",
+  "api": {
+    "baseURL": "https://api.gravitee.io",
+    "services": [
+      {
+        "name": "Api 1",
+        "path": "/api1"
+      },
+      {
+        "name": "Api 2",
+        "path": "/api2"
+      },
+      {
+        "name": "Api 3",
+        "path": "/api3"
+      }
+    ]
+  },
+  "auth": {
+    "baseURL": "http://auth.gravitee.io",
+    "domain": "gravitee",
+    "clientId": "test"
+  }
+}

@@ -13,19 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {LoginCallbackComponent} from './login/login-callback.component';
-import {LogoutCallbackComponent} from './logout/logout-callback.component';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
-
-const routes: Routes = [
-  { path: 'login/callback', component: LoginCallbackComponent },
-  { path: 'logout/callback', component: LogoutCallbackComponent },
-];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+@Component({
+  selector: 'app-logout-callback',
+  template: ``
 })
-export class AppRoutingModule { }
+export class LogoutCallbackComponent implements OnInit {
+
+  constructor(private router: Router) {
+  }
+
+  ngOnInit(): void {
+    localStorage.clear();
+    this.router.navigateByUrl('/');
+  }
+
+}

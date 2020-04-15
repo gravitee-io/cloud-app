@@ -13,19 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {LoginCallbackComponent} from './login/login-callback.component';
-import {LogoutCallbackComponent} from './logout/logout-callback.component';
+import { Component } from '@angular/core';
 
-
-const routes: Routes = [
-  { path: 'login/callback', component: LoginCallbackComponent },
-  { path: 'logout/callback', component: LogoutCallbackComponent },
-];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+@Component({
+  selector: 'app-snackbar',
+  templateUrl: './snackbar.component.html',
+  styleUrls: ['./snackbar.component.scss']
 })
-export class AppRoutingModule { }
+export class SnackbarComponent {
+  public title: string;
+  public errors: any[];
+
+  constructor() { }
+}
