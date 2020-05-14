@@ -30,7 +30,6 @@ export class AuthService {
               private configurationService: ConfigurationService) { }
 
   getToken(): string {
-    console.log(localStorage.getItem('token'));
     return localStorage.getItem('token');
   }
 

@@ -25,6 +25,7 @@ import {HttpClient} from '@angular/common/http';
 export class AppComponent implements OnInit {
   title = 'cloud-app';
   apis = [];
+  response: any;
 
   constructor(private configurationService: ConfigurationService,
               private httpClient: HttpClient) {
@@ -47,8 +48,9 @@ export class AppComponent implements OnInit {
 
   call(path): void {
     const apiConfig = this.configurationService.get('api');
+    this.response = 'Loading ...';
     this.httpClient.get<any>(apiConfig.baseURL + path).subscribe(response => {
-      console.log(response);
+      setTimeout(() => this.response = response, 1500);
     });
   }
 
