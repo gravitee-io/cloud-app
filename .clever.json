@@ -1,0 +1,11 @@
+{
+    "apps": [
+        {
+            "app_id": "app_e1d711e0-711d-47fc-86ad-207391128e51",
+            "org_id": "orga_953407f0-f1aa-4ddf-a0cf-83e3608d7a05",
+            "deploy_url": "https://github.com/gravitee-io/cloud-apim.git",
+            "name": "DEMO_V3_CLIENT",
+            "alias": "DEMO_V3_CLIENT"
+        }
+    ]
+}
