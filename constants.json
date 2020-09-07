@@ -1,25 +1,21 @@
 {
   "title": "Company App",
   "api": {
-    "baseURL": "https://api.gravitee.io",
+    "baseURL": "https://apim-ens-dev.factory.fr.atos.net/gateway",
     "services": [
       {
-        "name": "Api 1",
-        "path": "/api1"
+        "name": "echo",
+        "path": "/echo"
       },
       {
-        "name": "Api 2",
-        "path": "/api2"
-      },
-      {
-        "name": "Api 3",
-        "path": "/api3"
+        "name": "time",
+        "path": "/time"
       }
     ]
   },
   "auth": {
-    "baseURL": "http://auth.gravitee.io",
-    "domain": "gravitee",
-    "clientId": "test"
+    "baseURL": "https://am-ens-dev.factory.fr.atos.net/auth",
+    "domain": "cnam",
+    "clientId": "4367e11f-76e4-47cb-a7e1-1f76e427cbd3"
   }
 }
