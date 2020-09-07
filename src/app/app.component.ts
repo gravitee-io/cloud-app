@@ -38,12 +38,12 @@ export class AppComponent implements OnInit {
 
   signIn() {
     const authConfig = this.configurationService.get('auth');
-    window.location.href = authConfig.baseURL + '/' + authConfig.domain + '/oauth/authorize?client_id=' + authConfig.clientId + '&response_type=token&redirect_uri=' + window.location.origin + '/login/callback';
+    window.location.href = authConfig.baseURL + '/' + authConfig.domain + '/oauth/authorize?client_id=' + authConfig.clientId + '&response_type=token&redirect_uri=' + window.location.origin + '/cloudapp/login/callback';
   }
 
   signOut() {
     const authConfig = this.configurationService.get('auth');
-    window.location.href = authConfig.baseURL + '/' + authConfig.domain + '/logout?target_url=' + window.location.origin + '/logout/callback';
+    window.location.href = authConfig.baseURL + '/' + authConfig.domain + '/logout?target_url=' + window.location.origin + '/cloudapp/logout/callback';
   }
 
   call(path): void {
