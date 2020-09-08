@@ -54,6 +54,38 @@ export class AppComponent implements OnInit {
     });
   }
 
+  addConsent(): void {
+    const authConfig = this.configurationService.get('auth');
+    const umaURL = authConfig.baseURL + '/' + authConfig.domain + '/uma/protection/resource_set';
+    const body = {
+      'resource_scopes': ['profile'],
+      'description': 'Withings body balance',
+      'icon_uri': 'http://www.example.com/icons/picture.png',
+      'name': 'Body weight access',
+      'type': 'http://www.example.com/resource/weight'
+    };
+    this.response = 'Loading ...';
+    this.httpClient.post<any>(umaURL, body).subscribe(response => {
+      localStorage.setItem('resource_id', response._id);
+      setTimeout(() => this.response = response, 1500);
+    });
+  }
+
+  removeConsent(): void {
+    const resourceId = localStorage.getItem('resource_id');
+    if (resourceId) {
+      const authConfig = this.configurationService.get('auth');
+      const umaURL = authConfig.baseURL + '/' + authConfig.domain + '/uma/protection/resource_set/' + resourceId;
+      this.response = 'Loading ...';
+      this.httpClient.delete<any>(umaURL).subscribe(response => {
+        localStorage.removeItem('resource_id');
+        setTimeout(() => this.response = 'Consent revoked', 1500);
+      });
+    } else {
+      console.log('No resource id found');
+    }
+  }
+
   get user(): any {
     return localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
   }
