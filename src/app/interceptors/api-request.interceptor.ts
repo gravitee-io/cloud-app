@@ -33,7 +33,7 @@ export class ApiRequestInterceptor implements HttpInterceptor {
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
           this.snackbarService.open('Unauthorized');
-        } else if (err.status === 403) {
+        } else if (err.status === 403 || err.status === 400) {
           this.snackbarService.open('Access denied');
         } else {
           this.snackbarService.open(err.error.message || 'Server error');

@@ -66,10 +66,22 @@
   <div>
     <ul>
       <li>
-        <button (click)="addConsent()">Donner consentement</button>
+        <button (click)="createResource()" class="button">Créer une ressource</button>
       </li>
       <li>
-        <button (click)="removeConsent()">Revoquer consentement</button>
+        <button (click)="addConsent()" class="button">Donner consentement</button>
+      </li>
+      <li>
+        <button (click)="removeConsent()" class="button">Revoquer consentement</button>
+      </li>
+      <li>
+        <button (click)="removeResource()" class="button">Supprimer la ressource</button>
+      </li>
+      <li>
+        <button (click)="accessData()" class="button">Demander les access</button>
+      </li>
+      <li>
+        <button (click)="deleteAllResources()" class="button">Supprimer toutes les ressources</button>
       </li>
     </ul>
   </div>

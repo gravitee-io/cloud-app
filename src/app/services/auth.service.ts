@@ -57,6 +57,7 @@ export class AuthService {
       }
       if (accessTokenMap['access_token']) {
         localStorage.setItem('token', accessTokenMap['access_token']);
+        localStorage.setItem('id_token', accessTokenMap['id_token']);
         observer.next(true);
       } else {
         observer.next(false);

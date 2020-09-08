@@ -1,5 +1,5 @@
 {
-  "title": "Company App",
+  "title": "ENS Web,
   "api": {
     "baseURL": "https://apim-ens-dev.factory.fr.atos.net/gateway",
     "services": [
@@ -16,6 +16,7 @@
   "auth": {
     "baseURL": "https://am-ens-dev.factory.fr.atos.net/auth",
     "domain": "cnam",
-    "clientId": "4367e11f-76e4-47cb-a7e1-1f76e427cbd3"
+    "clientId": "4367e11f-76e4-47cb-a7e1-1f76e427cbd3",
+    "clientSecret": "ft0P25HrsleR50l6fVzsdOlw5cUI1MzJrthpPMnefNs"
   }
 }
