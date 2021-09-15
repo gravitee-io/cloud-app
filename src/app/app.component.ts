@@ -13,27 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ConfigurationService} from './services/configuration.service';
-import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'cloud-app';
-  apis = [];
-  response: any;
 
-  constructor(private configurationService: ConfigurationService,
-              private httpClient: HttpClient) {
+  constructor(private configurationService: ConfigurationService) {
     this.title = configurationService.get('title');
-  }
-
-  ngOnInit(): void {
-    this.apis = this.configurationService.get('api').services;
   }
 
   signIn() {
@@ -44,14 +36,6 @@ export class AppComponent implements OnInit {
   signOut() {
     const authConfig = this.configurationService.get('auth');
     window.location.href = authConfig.baseURL + '/' + authConfig.domain + '/logout?target_url=' + window.location.origin + '/logout/callback';
-  }
-
-  call(path): void {
-    const apiConfig = this.configurationService.get('api');
-    this.response = 'Loading ...';
-    this.httpClient.get<any>(apiConfig.baseURL + path).subscribe(response => {
-      setTimeout(() => this.response = response, 1500);
-    });
   }
 
   get user(): any {

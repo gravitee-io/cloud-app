@@ -17,11 +17,16 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginCallbackComponent} from './login/login-callback.component';
 import {LogoutCallbackComponent} from './logout/logout-callback.component';
+import {AccountComponent} from './account/account.component';
+import {ApisComponent} from './apis/apis.component';
 
 
 const routes: Routes = [
+  { path: 'apis', component: ApisComponent },
+  { path: 'account', component: AccountComponent},
   { path: 'login/callback', component: LoginCallbackComponent },
   { path: 'logout/callback', component: LogoutCallbackComponent },
+  { path: '', redirectTo: 'apis', pathMatch: 'full'},
 ];
 
 @NgModule({

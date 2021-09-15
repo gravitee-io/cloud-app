@@ -1,0 +1,95 @@
+<!--
+
+    Copyright (C) 2015 The Gravitee team (http://gravitee.io)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<div style="text-align: left; display: flex; flex-direction: column; border: 1px solid grey; border-radius: 5px; padding: 20px; min-width: 1200px; background: #fafafa;">
+  <div style="display: flex; align-items: center;">
+    <img [src]="'assets/default-account-icon.png'" alt="Photo of a user" [width]="'120'" style="border-radius: 50%;"/>
+    <div>
+      <h3>Test</h3>
+      <span>Test</span>
+    </div>
+  </div>
+  <mat-tab-group>
+    <mat-tab label="Profile">
+      <pre>{{user | json}}</pre>
+    </mat-tab>
+    <mat-tab label="Factors">
+      <div style="padding: 10px;">
+        <h3>My factors</h3>
+        <mat-divider></mat-divider>
+        <div style="padding: 10px;">
+          <table mat-table [dataSource]="enrolledFactors" style="width: 100%;">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef> Type </th>
+              <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Actions </th>
+              <td mat-cell *matCellDef="let element"> <a (click)="removeFactor(element.id)" style="cursor: pointer; color: blue;">>> Remove factor</a> </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['name', 'type', 'actions']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['name', 'type', 'actions'];"></tr>
+          </table>
+        </div>
+
+        <h3>Factors catalog</h3>
+        <mat-divider></mat-divider>
+        <div style="padding: 10px;">
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let factor of factorsCatalog">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{factor.name}}
+                </mat-panel-title>
+                <mat-panel-description>
+                  {{factor.type}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p *ngIf="factor.factorType === 'EMAIL'">
+                <mat-form-field appearance="fill" style="width: 300px;">
+                  <mat-label>Email</mat-label>
+                  <input matInput name="userEmail" placeholder="Please confirm your email address" [(ngModel)]="userEmail">
+                </mat-form-field>
+              </p>
+              <p><a (click)="enrollFactor(factor)" style="cursor: pointer; color: blue;">>> Enroll this factor</a></p>
+              <div *ngIf="enrolledFactor">
+                <div style="display: flex;">
+                  <pre>{{enrolledFactor | json}}</pre>
+                  <img *ngIf="qrCode" [src]="qrCode" height="200px"/>
+                </div>
+                <p>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Code</mat-label>
+                    <input matInput name="enrollmentCode" [(ngModel)]="enrollmentCode">
+                  </mat-form-field>
+                </p>
+                <p><a (click)="verifyFactor(factor)" style="cursor: pointer; color: blue;">>> Verify this factor</a></p>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

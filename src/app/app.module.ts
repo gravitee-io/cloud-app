@@ -33,13 +33,24 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {TokenInterceptor} from './interceptors/token.interceptor';
+import {AccountComponent} from './account/account.component';
+import {ApisComponent} from './apis/apis.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCardModule} from '@angular/material/card';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {FormsModule} from '@angular/forms';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
     AppComponent,
     SnackbarComponent,
     LoginCallbackComponent,
-    LogoutCallbackComponent
+    LogoutCallbackComponent,
+    AccountComponent,
+    ApisComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +62,14 @@ import {TokenInterceptor} from './interceptors/token.interceptor';
     MatSnackBarModule,
     MatIconModule,
     MatMenuModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTabsModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatTableModule
   ],
   providers: [
     ConfigurationService,
