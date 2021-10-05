@@ -45,6 +45,7 @@
 
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef> Actions </th>
+              <td mat-cell *matCellDef="let element"> <mat-slide-toggle [checked]="element.primary" (change)="updateFactor(element.id, $event)">Set as primary</mat-slide-toggle></td>
               <td mat-cell *matCellDef="let element"> <a (click)="removeFactor(element.id)" style="cursor: pointer; color: blue;">>> Remove factor</a> </td>
             </ng-container>
 

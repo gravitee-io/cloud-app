@@ -79,6 +79,14 @@ export class AccountComponent implements OnInit {
     });
   }
 
+  updateFactor(factorId, event) {
+    const body: any = {};
+    body.primary = event.checked;
+    this.httpClient.put<any>(this.baseURL + '/' + this.domain + '/account/api/factors/' + factorId, body).subscribe(response => {
+      this.getEnrolledFactors();
+    });
+  }
+
   private getProfile() {
     this.user = 'Loading ...';
     this.httpClient.get<any>(this.baseURL + '/' + this.domain + '/account/api/profile').subscribe(response => {
@@ -95,13 +103,18 @@ export class AccountComponent implements OnInit {
   private getEnrolledFactors() {
     this.httpClient.get<any>(this.baseURL + '/' + this.domain + '/account/api/factors').subscribe(response => {
       setTimeout(() => {
-        this.enrolledFactors = this.factorsCatalog.filter(c => {
-          if (response) {
-            return response.filter(e => e.factorId === c.id).length > 0;
-          } else {
-            return false;
-          }
-        });
+        this.enrolledFactors = this.factorsCatalog
+          .filter(c => {
+            if (response) {
+              return response.filter(e => e.factorId === c.id).length > 0;
+            } else {
+              return false;
+            }
+          })
+          .map(f => {
+            f.primary = response.filter(e => e.factorId === f.id)[0].primary;
+            return f;
+          });
       }, 1000);
     });
   }

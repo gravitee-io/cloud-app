@@ -42,6 +42,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -52,25 +53,26 @@ import {MatTableModule} from '@angular/material/table';
     AccountComponent,
     ApisComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NoopAnimationsModule,
-    MatListModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatSnackBarModule,
-    MatIconModule,
-    MatMenuModule,
-    HttpClientModule,
-    MatTabsModule,
-    MatCardModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatTableModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NoopAnimationsModule,
+        MatListModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatSnackBarModule,
+        MatIconModule,
+        MatMenuModule,
+        HttpClientModule,
+        MatTabsModule,
+        MatCardModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatTableModule,
+        MatSlideToggleModule
+    ],
   providers: [
     ConfigurationService,
     AuthService,
