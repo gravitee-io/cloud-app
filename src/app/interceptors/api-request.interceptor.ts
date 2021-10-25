@@ -36,7 +36,7 @@ export class ApiRequestInterceptor implements HttpInterceptor {
         } else if (err.status === 403) {
           this.snackbarService.open('Access denied');
         } else {
-          this.snackbarService.open(err.error.message || 'Server error');
+          this.snackbarService.open(err.error.message || err.error.errorMessage || 'Server error');
         }
       }
     }));
