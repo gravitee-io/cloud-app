@@ -92,5 +92,18 @@
         </div>
       </div>
     </mat-tab>
+    <mat-tab label="Update Password">
+      <h3>Update Password</h3>
+      <mat-divider></mat-divider>
+      <div style="padding: 10px;">
+          <p>
+            <mat-form-field appearance="fill">
+              <mat-label>New Password</mat-label>
+              <input matInput name="newPassword" [(ngModel)]="newPassword">
+            </mat-form-field>
+          </p>
+          <p><a (click)="updatePassword(newPassword)" style="cursor: pointer; color: blue;">>> Update Password</a></p>
+      </div>
+  </mat-tab>
   </mat-tab-group>
 </div>

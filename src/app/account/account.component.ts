@@ -15,7 +15,8 @@
  */
 import {Component, OnInit} from '@angular/core';
 import {ConfigurationService} from '../services/configuration.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-account',
@@ -30,11 +31,13 @@ export class AccountComponent implements OnInit {
   qrCode: string;
   enrollmentCode: string;
   userEmail: string;
+  newPassword: string;
   private baseURL: string;
   private domain: string;
 
   constructor(private configurationService: ConfigurationService,
-              private httpClient: HttpClient) {
+              private httpClient: HttpClient,
+              private snackBar: MatSnackBar) {
     const authConfig = this.configurationService.get('auth');
     this.baseURL = authConfig.baseURL;
     this.domain = authConfig.domain;
@@ -87,6 +90,15 @@ export class AccountComponent implements OnInit {
     });
   }
 
+  updatePassword(password) {
+    const body: any = {};
+    body.password = password;
+    this.httpClient.post<any>(this.baseURL + '/' + this.domain + '/account/api/changePassword', body).subscribe(response => {
+      this.newPassword = '';
+      this.displayMessage('Password updated');
+    });
+  }
+
   private getProfile() {
     this.user = 'Loading ...';
     this.httpClient.get<any>(this.baseURL + '/' + this.domain + '/account/api/profile').subscribe(response => {
@@ -119,4 +131,9 @@ export class AccountComponent implements OnInit {
     });
   }
 
+  private displayMessage(message) {
+    const config = new MatSnackBarConfig();
+    config.duration = 1500;
+    this.snackBar.open(message, '', config);
+  }
 }
