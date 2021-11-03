@@ -73,6 +73,12 @@
                   <input matInput name="userEmail" placeholder="Please confirm your email address" [(ngModel)]="userEmail">
                 </mat-form-field>
               </p>
+              <p *ngIf="factor.factorType === 'SMS' || factor.factorType === 'CALL'">
+                <mat-form-field appearance="fill" style="width: 300px;">
+                  <mat-label>Phone number</mat-label>
+                  <input matInput name="phoneNumber" placeholder="Please confirm your phone number" [(ngModel)]="phoneNumber">
+                </mat-form-field>
+              </p>
               <p><a (click)="enrollFactor(factor)" style="cursor: pointer; color: blue;">>> Enroll this factor</a></p>
               <div *ngIf="enrolledFactor">
                 <div style="display: flex;">
