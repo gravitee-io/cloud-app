@@ -32,6 +32,7 @@ export class AccountComponent implements OnInit {
   enrollmentCode: string;
   userEmail: string;
   newPassword: string;
+  phoneNumber: string;
   private baseURL: string;
   private domain: string;
 
@@ -55,6 +56,10 @@ export class AccountComponent implements OnInit {
     if (this.userEmail) {
       const account: any = {};
       account.email = this.userEmail;
+      body.account = account;
+    } else if (this.phoneNumber) {
+      const account: any = {};
+      account.phoneNumber = this.phoneNumber;
       body.account = account;
     }
     this.httpClient.post<any>(this.baseURL + '/' + this.domain + '/account/api/factors', body).subscribe(response => {
