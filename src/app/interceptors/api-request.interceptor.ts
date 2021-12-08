@@ -25,6 +25,11 @@ export class ApiRequestInterceptor implements HttpInterceptor {
   constructor(private snackbarService: SnackbarService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (request.url.endsWith("ciba/authenticate") || request.url.endsWith("oauth/token")) {
+      // the error must be managed by the CIBA component
+      return next.handle(request);
+    }
+    
     return next.handle(request).pipe(tap((event: HttpEvent<any>) => {
       if (event instanceof HttpResponse) {
         // do stuff with response if you want

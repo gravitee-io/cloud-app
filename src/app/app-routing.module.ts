@@ -19,10 +19,12 @@ import {LoginCallbackComponent} from './login/login-callback.component';
 import {LogoutCallbackComponent} from './logout/logout-callback.component';
 import {AccountComponent} from './account/account.component';
 import {ApisComponent} from './apis/apis.component';
+import { CibaComponent } from './ciba/ciba.component';
 
 
 const routes: Routes = [
   { path: 'apis', component: ApisComponent },
+  { path: 'ciba', component: CibaComponent },
   { path: 'account', component: AccountComponent},
   { path: 'login/callback', component: LoginCallbackComponent },
   { path: 'logout/callback', component: LogoutCallbackComponent },

@@ -110,6 +110,20 @@
           </p>
           <p><a (click)="updatePassword(newPassword)" style="cursor: pointer; color: blue;">>> Update Password</a></p>
       </div>
-  </mat-tab>
+    </mat-tab>
+    <mat-tab *ngIf="useCiba" label="CIBA Notifications">
+      <h3>Your CIBA notifications</h3>
+      <mat-divider></mat-divider>
+      <div *ngFor="let notification of notificationRequests">
+        <p width="150px" height="auto">
+          <mat-icon>{{notificationStatusIcon(notification)}}</mat-icon>
+          {{notification.message}}
+        </p>
+
+        <button mat-button *ngIf="notification.action == 'pending'" (click)="onRejectClick(notification)">Reject</button>
+        <button mat-button *ngIf="notification.action == 'pending'" (click)="onAcceptClick(notification)">Accept</button>
+        <mat-divider></mat-divider>
+      </div>
+    </mat-tab>
   </mat-tab-group>
 </div>

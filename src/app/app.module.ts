@@ -43,6 +43,7 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {CibaComponent as CibaComponent } from './ciba/ciba.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     LoginCallbackComponent,
     LogoutCallbackComponent,
     AccountComponent,
-    ApisComponent
+    ApisComponent,
+    CibaComponent
   ],
     imports: [
         BrowserModule,
