@@ -24,10 +24,13 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(public authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-    const token = this.authService.getToken();
-
-    const dupReq = token ? req.clone({ headers: req.headers.set('Authorization', `Bearer ${token }`) }) : req;
-    return next.handle(dupReq);
+    if (req.url.endsWith('ciba/authenticate') || req.url.endsWith('oauth/token')) {
+      // DO NOT set the Authorization Header using basic schema
+      return next.handle(req);
+    } else {
+      const token = this.authService.getToken();
+      const dupReq = token ? req.clone({ headers: req.headers.set('Authorization', `Bearer ${token}`) }) : req;
+      return next.handle(dupReq);
+    }
   }
 }

@@ -18,8 +18,14 @@
     ]
   },
   "auth": {
-    "baseURL": "http://auth.gravitee.io",
-    "domain": "gravitee",
+    "baseURL": "https://auth.gravitee.io",
+    "domain": "domain",
     "clientId": "test"
+  },
+  "ciba": {
+    "enabled": true,
+    "websocketEndpoint": "wss://auth.gravitee.io/ws",
+    "clientId": "cibaclientid",
+    "clientSecret": "cibasecret"
   }
 }
