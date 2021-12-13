@@ -30,7 +30,11 @@ export class AppComponent {
 
   signIn() {
     const authConfig = this.configurationService.get('auth');
-    window.location.href = authConfig.baseURL + '/' + authConfig.domain + '/oauth/authorize?client_id=' + authConfig.clientId + '&response_type=token&redirect_uri=' + window.location.origin + '/login/callback';
+    if (authConfig.scope) {
+      window.location.href = authConfig.baseURL + '/' + authConfig.domain + '/oauth/authorize?client_id=' + authConfig.clientId + '&response_type=token&redirect_uri=' + window.location.origin + '/login/callback&scope='+authConfig.scope;
+    } else {
+      window.location.href = authConfig.baseURL + '/' + authConfig.domain + '/oauth/authorize?client_id=' + authConfig.clientId + '&response_type=token&redirect_uri=' + window.location.origin + '/login/callback';
+    }
   }
 
   signOut() {

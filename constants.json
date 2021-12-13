@@ -18,8 +18,9 @@
     ]
   },
   "auth": {
-    "baseURL": "http://auth.gravitee.io",
-    "domain": "gravitee",
-    "clientId": "test"
+    "baseURL": "https://am.meelo.io/auth",
+    "domain": "cofidisdomain",
+    "clientId": "cofidis_client_id",
+    "scope" : "openid profile"
   }
 }
