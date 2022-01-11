@@ -15,9 +15,9 @@
  */
 import {Component, OnInit} from '@angular/core';
 import {ConfigurationService} from '../services/configuration.service';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
-import { webSocket, WebSocketSubject } from "rxjs/webSocket";
+import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
 
 @Component({
   selector: 'app-account',
@@ -36,8 +36,8 @@ export class AccountComponent implements OnInit {
   phoneNumber: string;
   private baseURL: string;
   private domain: string;
-  
-  useCiba: boolean = false;
+
+  useCiba: boolean;
   private websocket: WebSocketSubject<any>;
   notificationRequests: Array<any> = [];
 
@@ -53,7 +53,7 @@ export class AccountComponent implements OnInit {
     this.useCiba = cibaConfig && cibaConfig.enabled;
     if (this.useCiba) {
       this.websocket = webSocket(cibaConfig.websocketEndpoint);
-      this.websocket.subscribe(   
+      this.websocket.subscribe(
         msg => {
           console.info('CIBA Websocket - message received: ' + msg);
           this.registerCibaNotification(msg);
@@ -73,41 +73,41 @@ export class AccountComponent implements OnInit {
 
   notificationStatusIcon(notification) {
     if (notification.action === 'reject') {
-      return "block";
+      return 'block';
     } else if (notification.action === 'validate') {
-      return "check_circle_outline";
+      return 'check_circle_outline';
     } else {
-      return "pending";
+      return 'pending';
     }
   }
 
   onRejectClick(notification) {
-    notification['action'] = 'reject'
+    notification.action = 'reject';
     this.websocket.next(notification);
   }
 
   onAcceptClick(notification) {
-    notification['action'] = 'validate'
+    notification.action = 'validate';
     this.websocket.next(notification);
   }
 
   registerCibaNotification(notificationRequest) {
-    notificationRequest['action'] = 'pending'
+    notificationRequest.action = 'pending';
     this.notificationRequests.push(notificationRequest);
   }
 
   registerCibaSubject() {
     // send the signIn message to the Delegate HTTP service in order to receive
     // CIBA notifications
-    
+
     this.httpClient.get<any>(this.baseURL + '/' + this.domain + '/account/api/profile').subscribe(profile => {
-      let initMsg = {
+      const initMsg = {
         action: 'signIn',
         subject: profile.id
-      }
-      this.websocket.next(initMsg); 
+      };
+      this.websocket.next(initMsg);
     });
-    
+
   }
 
   enrollFactor(factor) {

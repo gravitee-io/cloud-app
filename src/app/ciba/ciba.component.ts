@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ConfigurationService} from '../services/configuration.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
@@ -43,7 +43,7 @@ export class CibaComponent {
   }
 
   call(): void {
-    let authorizationData = 'Basic ' + btoa(this.cibaConfig.clientId + ':' + this.cibaConfig.clientSecret);      
+    const authorizationData = 'Basic ' + btoa(this.cibaConfig.clientId + ':' + this.cibaConfig.clientSecret);
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -51,8 +51,8 @@ export class CibaComponent {
         'Authorization': authorizationData
       })};
 
-    const data = 'scope=openid&login_hint='+ this.payementRequest.loginHint + '&binding_message=' + this.payementRequest.message;
-    this.httpClient.post<any>(this.authConfig.baseURL + '/' +  this.authConfig.domain + '/ciba/authenticate', data,  httpOptions)
+    const data = 'scope=openid&login_hint=' + this.payementRequest.loginHint + '&binding_message=' + this.payementRequest.message;
+    this.httpClient.post<any>(this.authConfig.baseURL + '/' +  this.authConfig.domain + '/oidc/ciba/authenticate', data,  httpOptions)
     .subscribe(response => {
         this.authReqId = response.auth_req_id;
         this.response = this.PENDING;
@@ -64,7 +64,7 @@ export class CibaComponent {
   }
 
   private requestToken() {
-    let authorizationData = 'Basic ' + btoa(this.cibaConfig.clientId + ':' + this.cibaConfig.clientSecret);      
+    const authorizationData = 'Basic ' + btoa(this.cibaConfig.clientId + ':' + this.cibaConfig.clientSecret);
 
     const httpOptions = {
       headers: new HttpHeaders({
