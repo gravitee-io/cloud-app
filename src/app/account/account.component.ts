@@ -36,6 +36,7 @@ export class AccountComponent implements OnInit {
   phoneNumber: string;
   private baseURL: string;
   private domain: string;
+  recoveryCodes: any[];
 
   useCiba: boolean;
   private websocket: WebSocketSubject<any>;
@@ -69,6 +70,7 @@ export class AccountComponent implements OnInit {
     this.getFactorsCatalog();
     this.getEnrolledFactors();
     this.registerCibaSubject();
+    this.getRecoveryCodes();
   }
 
   notificationStatusIcon(notification) {
@@ -193,6 +195,18 @@ export class AccountComponent implements OnInit {
             return f;
           });
       }, 1000);
+    });
+  }
+
+  private getRecoveryCodes(){
+    this.httpClient.get<any>(this.baseURL + '/' + this.domain + '/account/api/auth/recovery_code').subscribe(response => {
+      this.recoveryCodes = response;
+    });
+  }
+
+  public generateRecoveryCodes(){
+    this.httpClient.post<any>(this.baseURL + '/' + this.domain + '/account/api/auth/recovery_code', {}).subscribe(response => {
+      this.recoveryCodes = response;
     });
   }
 
