@@ -29,7 +29,7 @@
     </mat-tab>
     <mat-tab label="Factors">
       <div style="padding: 10px;">
-        <h3>My factors</h3>
+        <h3 class="h3-font">My factors</h3>
         <mat-divider></mat-divider>
         <div style="padding: 10px;">
           <table mat-table [dataSource]="enrolledFactors" style="width: 100%;">
@@ -54,7 +54,7 @@
           </table>
         </div>
 
-        <h3>Factors catalog</h3>
+        <h3 class="h3-font">Factors catalog</h3>
         <mat-divider></mat-divider>
         <div style="padding: 10px;">
           <mat-accordion>
@@ -93,6 +93,27 @@
                 </p>
                 <p><a (click)="verifyFactor(factor)" style="cursor: pointer; color: blue;">>> Verify this factor</a></p>
               </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+
+        <div style="padding: 10px;">
+          <h3 class="h3-font">Recovery Codes</h3>
+          <button mat-raised-button (click)="generateRecoveryCodes()">Generate</button>
+
+          <mat-accordion class="accordion-margin" *ngIf="recoveryCodes && recoveryCodes.length > 0">
+            <mat-expansion-panel class="accordion-margin">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  My Recovery Codes
+                </mat-panel-title>
+
+              </mat-expansion-panel-header>
+              <ul>
+                <li *ngFor="let item of recoveryCodes; let i = index" [attr.data-index]="i">
+                  {{item}}
+                </li>
+              </ul>
             </mat-expansion-panel>
           </mat-accordion>
         </div>
