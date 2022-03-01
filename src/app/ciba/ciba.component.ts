@@ -51,7 +51,7 @@ export class CibaComponent {
         'Authorization': authorizationData
       })};
 
-    const data = 'scope=openid&login_hint=' + this.payementRequest.loginHint + '&binding_message=' + this.payementRequest.message;
+    const data = 'scope=openid&login_hint=' + this.payementRequest.loginHint + '&binding_message=' + this.payementRequest.message + '&user_code=' + this.payementRequest.userCode;
     this.httpClient.post<any>(this.authConfig.baseURL + '/' +  this.authConfig.domain + '/oidc/ciba/authenticate', data,  httpOptions)
     .subscribe(response => {
         this.authReqId = response.auth_req_id;
