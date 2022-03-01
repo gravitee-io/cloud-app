@@ -117,7 +117,7 @@
       <div *ngFor="let notification of notificationRequests">
         <p width="150px" height="auto">
           <mat-icon>{{notificationStatusIcon(notification)}}</mat-icon>
-          User code = {{notification.userCode}}; message = {{notification.message}}
+          {{notification.message}}
         </p>
 
         <button mat-button *ngIf="notification.action == 'pending'" (click)="onRejectClick(notification)">Reject</button>
