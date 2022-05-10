@@ -1,3 +1,9 @@
+# DEPRECATED
+
+This repository has been markes as archived and read-only. 
+
+Please use this repository https://github.com/gravitee-io/gravitee-am-app-sandbox-angular instead to see how you can interact with Gravitee.io Access Management via an Angular web application.
+
 # CloudApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
