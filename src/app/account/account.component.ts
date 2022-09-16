@@ -34,6 +34,8 @@ export class AccountComponent implements OnInit {
   userEmail: string;
   newPassword: string;
   phoneNumber: string;
+  credentials: any[];
+  clientId: string;
   private baseURL: string;
   private domain: string;
   recoveryCodes: any[];
@@ -50,6 +52,7 @@ export class AccountComponent implements OnInit {
 
     this.baseURL = authConfig.baseURL;
     this.domain = authConfig.domain;
+    this.clientId = authConfig.clientId;
 
     this.useCiba = cibaConfig && cibaConfig.enabled;
     if (this.useCiba) {
@@ -71,6 +74,7 @@ export class AccountComponent implements OnInit {
     this.getEnrolledFactors();
     this.registerCibaSubject();
     this.getRecoveryCodes();
+    this.getCredentials();
   }
 
   notificationStatusIcon(notification) {
@@ -215,4 +219,32 @@ export class AccountComponent implements OnInit {
     config.duration = 1500;
     this.snackBar.open(message, '', config);
   }
+
+  private getCredentials() {
+    this.httpClient.get<any>(this.baseURL + '/' + this.domain + '/account/api/webauthn/credentials').subscribe(response => {
+      this.credentials = response;
+    });
+  }
+
+  public registerCredential(){
+    const body = {
+      redirect_uri: window.location.href
+    }
+
+    this.httpClient.post<any>(this.baseURL + '/' + this.domain + '/account/api/token', body)
+      .subscribe(
+        response => {
+          const token = response.token;
+          window.location.href = this.baseURL + '/' + this.domain + '/webauthn/register?client_id=' + this.clientId + '&registration_token=' + token;
+        });
+  }
+
+  public deleteCredential(id) {
+    if (confirm("Are you sure you want to delete the credential?")) {
+      this.httpClient.delete<any>(this.baseURL + '/' + this.domain + '/account/api/webauthn/credentials/' + id).subscribe(response => {
+        this.getCredentials();
+      });
+    }
+  }
+
 }

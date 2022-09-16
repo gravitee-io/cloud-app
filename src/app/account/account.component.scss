@@ -6,3 +6,31 @@
 .accordion-margin {
   margin-top: 10px;
 }
+
+.mat-row:hover {
+  background-color: #c6d2f5;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+th, td {
+  overflow: hidden;
+  width:auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mat-column-identifier {
+  width: 20% !important;
+}
+
+.mat-column-actions {
+  width: 10% !important;
+}
+
+.mat-header-cell {
+  color: #030746;
+}
