@@ -22,10 +22,15 @@
     <mat-label>Username</mat-label>
     <input matInput placeholder="Username" [(ngModel)]="payementRequest.loginHint"/>
   </mat-form-field>
-  
+
   <mat-form-field class="payment-input" appearance="fill">
     <mat-label>Message Binding</mat-label>
     <input matInput placeholder="Message to display on user device" [(ngModel)]="payementRequest.message" />
+  </mat-form-field>
+
+  <mat-form-field class="payment-input" appearance="fill">
+    <mat-label>User Code</mat-label>
+    <input matInput placeholder="User's secret code/pin" [(ngModel)]="payementRequest.userCode" />
   </mat-form-field>
 
   <button mat-button color="primary" (click)="call()">Submit Request</button>
